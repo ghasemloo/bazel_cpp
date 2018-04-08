@@ -1,0 +1,32 @@
+package(default_visibility = ["//visibility:public"])
+
+cc_binary(
+    name = "main",
+    srcs = ["main.cc"],
+    deps = [
+        ":hello_world",
+    ],
+)
+
+cc_library(
+    name = "hello_world",
+    srcs = [
+        "hello_world.cc",
+    ],
+    hdrs = [
+        "hello_world.h",
+    ],
+    deps = [
+    ],
+)
+
+cc_test(
+    name="hello_world_test",
+    srcs = [
+        "hello_world_test.cc",
+    ],
+    deps = [
+        ":hello_world",
+        "@com_google_googletest//:gtest_main",
+    ],
+)
