@@ -1,0 +1,34 @@
+# Based on https://github.com/bazelbuild/bazel-toolchains/blob/master/bazelrc/bazel-0.10.0.bazelrc
+
+startup --host_jvm_args=-Dbazel.DigestFunction=SHA256
+
+# Auth
+build:remote --auth_enabled=true
+build:remote --auth_scope=https://www.googleapis.com/auth/cloud-platform
+build:remote --tls_enabled=true
+
+# RBE Toolchains
+build:remote --experimental_strict_action_env=true
+build:remote --experimental_remote_platform_override='
+  properties:{
+    name:"container-image"
+    value:"docker://gcr.io/cloud-marketplace/google/rbe-debian8@sha256:d84a7de5175a22505209f56b02f1da20ccec64880da09ee38eaef3670fbd2a56"
+  }
+'
+build:remote --crosstool_top=@bazel_toolchains//configs/debian8_clang/0.3.0/bazel_0.10.0:toolchain
+build:remote --host_java_toolchain=@bazel_toolchains//configs/debian8_clang/0.3.0:jdk8
+build:remote --host_javabase=@bazel_toolchains//configs/debian8_clang/0.3.0:jdk8
+build:remote --javabase=@bazel_toolchains//configs/debian8_clang/0.3.0:jdk8
+
+build:remote --remote_timeout=3600
+build:remote --remote_local_fallback=false
+build:remote --spawn_strategy=remote
+
+build:remote --strategy=Javac=remote
+build:remote --strategy=Closure=remote
+build:remote --genrule_strategy=remote
+build:remote --define=EXECUTOR=remote
+
+# BRUI
+build:results --bes_timeout=10s
+build:results --bes_best_effort=false
