@@ -15,6 +15,7 @@ cc_library(
     ],
     hdrs = [
         "hello_world.h",
+        "v.h",
     ],
     deps = [
     ],
