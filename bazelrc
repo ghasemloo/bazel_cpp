@@ -1,4 +1,4 @@
-# FROM https://github.com/bazelbuild/bazel-toolchains/blob/master/bazelrc/bazel-0.15.0.bazelrc
+# https://github.com/bazelbuild/bazel-toolchains/blob/master/bazelrc/bazel-0.15.0.bazelrc
 # Copyright 2016 The Bazel Authors. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
